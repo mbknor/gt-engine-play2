@@ -1,0 +1,2 @@
+# Add full classname for all JavaExtension-classes - one on each line
+kjetland.gtengineplay.JavaExtensions
