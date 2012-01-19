@@ -1,0 +1,2 @@
+# Add full classname to all your GTFastTag-classes - one class on each line
+utils.CustomFastTags

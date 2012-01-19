@@ -1,0 +1,16 @@
+#{extends 'main.html'/}
+
+
+is_error: ${is_error}<br>
+
+error for name: #{error 'name'/}<br>
+
+#{ifErrors}
+    has errors:<br>
+    #{errors}
+        ${error}
+    #{/errors}
+#{/ifErrors}
+#{else}
+    not error<br>
+#{/else}

@@ -1,0 +1,42 @@
+#{extends 'main.html'/}
+hello world, ${name}!
+<br>
+Message: &{'someText', 'the param'}<br>
+Message: &{'someText2'}
+<hr>
+
+Today is: ${today.format("dd.MM.yyyy")}<br>
+
+*{
+${q.w.e}
+}*
+
+@{Application.index}
+
+<hr>
+<ul>
+#{list myList, as: 'l'}
+    <li>
+        ${l} -
+        <a href="@{Application.someOtherPage(l.toString())}">
+        @{Application.someOtherPage(l.toString())}
+        </a>
+    </li>
+
+#{/list}
+</ul>
+
+<hr>
+#{myTag 'hello'/}
+
+<hr>
+FastTag: #{testFastTag }Some content to the fasttag#{/testFastTag}
+<hr>
+#{select 'someName', items: dataList, valueProperty: 'id', labelProperty:'name'/}
+
+
+
+<hr>
+#{form @Application.index() }
+
+#{/form}
