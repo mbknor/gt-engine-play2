@@ -9,14 +9,17 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       // Add your project dependencies here,
-      "kjetland" %% "gt-engine-play" % "0.1"
+      "kjetland" %% "gt-engine-play" % "0.1.1"
     )
     
     javacOptions += "-g"
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
       // Add your own project settings here      
-      resolvers ++= Seq("mbknor github Repository" at "http://mbknor.github.com/m2repo/releases/")
+      resolvers ++= Seq(
+          "mbknor github Repository" at "http://mbknor.github.com/m2repo/releases/",
+          Resolver.file("Local ivy Repository", file("/Users/mortenkjetland/.ivy2/local/"))(Resolver.ivyStylePatterns)
+          )
     )
 
 }

@@ -30,7 +30,7 @@ object GTEnginePlayBuild extends Build {
   object Dependencies {
 
       val runtime = Seq(
-        "kjetland" % "gt-engine_2.9.1" % "0.1.7",
+        "kjetland" % "gt-engine_2.9.1" % "0.1.7.1",
         "play" %% "play" % "2.0-RC1-SNAPSHOT",
         "commons-io" % "commons-io" % "2.0.1"
       )
@@ -40,7 +40,7 @@ object GTEnginePlayBuild extends Build {
   object BuildSettings {
 
           val buildOrganization = "kjetland"
-          val buildVersion      = "0.1"
+          val buildVersion      = "0.1.1"
           val buildScalaVersion = "2.9.1"
           val buildSbtVersion   = "0.11.2"
 
