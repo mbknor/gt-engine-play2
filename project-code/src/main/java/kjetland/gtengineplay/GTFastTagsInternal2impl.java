@@ -1,6 +1,8 @@
 package kjetland.gtengineplay;
 
 import org.apache.commons.lang.StringUtils;
+import play.api.mvc.Call;
+import play.api.mvc.Request;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Http;
@@ -18,22 +20,34 @@ import java.util.Map;
 public class GTFastTagsInternal2impl extends GTFastTag {
 
     public static void tag_form(GTJavaBase template, Map<String, Object> args, GTContentRenderer content) {
-        String url = (String) args.get("arg");
-        if (url == null) {
-            url = (String) args.get("action");
+        Call call = (Call) args.get("arg");
+        if (call == null) {
+            call = (Call) args.get("action");
         }
-        if (url == null) {
+        if (call == null) {
             throw new GTTemplateRuntimeException("Missing action/url");
         }
         String enctype = (String) args.get("enctype");
         if (enctype == null) {
             enctype = "application/x-www-form-urlencoded";
         }
-        String method = "POST"; // prefer POST for form ....
+        String method = call.method();
         
         if (args.containsKey("method")) {
             method = args.get("method").toString();
         }
+        
+        String url = null;
+        
+        if ( args.containsKey("_use_absoluteURL")) {
+            boolean secure = Http.Context.current().request().uri().startsWith("HTTPS");
+            //url = call.absoluteURL( scala.Boolean.box(secure), Http.Context.current().request() );
+            //TODO: Don't know how to use call.absoluteURL from java..
+            throw new GTTemplateRuntimeException("absolute address resolving @@ is not implemented yet");
+        } else {
+            url = call.url();
+        }
+        
         if (!("GET".equalsIgnoreCase(method) || "POST".equalsIgnoreCase(method))) {
             String separator = url.indexOf('?') != -1 ? "&" : "?";
             url += separator + "x-http-method-override=" + method.toUpperCase();
@@ -50,13 +64,24 @@ public class GTFastTagsInternal2impl extends GTFastTag {
     }
 
     public static void tag_a(GTJavaBase template, Map<String, Object> args, GTContentRenderer content) {
-        String url = (String) args.get("arg");
-        if (url == null) {
-            url = (String) args.get("action");
+        Call call = (Call) args.get("arg");
+        if (call == null) {
+            call = (Call) args.get("action");
         }
-        if (url == null) {
+        if (call == null) {
             throw new GTTemplateRuntimeException("Missing action/url");
         }
+        
+        String url = null;
+        if ( args.containsKey("_use_absoluteURL")) {
+            boolean secure = Http.Context.current().request().uri().startsWith("HTTPS");
+            //url = call.absoluteURL( scala.Boolean.box(secure), Http.Context.current().request() );
+            //TODO: Don't know how to use call.absoluteURL from java..
+            throw new GTTemplateRuntimeException("absolute address resolving @@ is not implemented yet");
+        } else {
+            url = call.url();
+        }
+        
         StringWriter out = template.out;
         out.append("<a href=\"" + url + "\" " + GTInternalFastTags.serialize(args, "href") + ">");
         template.insertOutput(content.render());

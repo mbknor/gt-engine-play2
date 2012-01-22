@@ -79,6 +79,10 @@ class GTGroovyBase2xImpl extends GTGroovyBase {
   }
 }
 
+object GTESettings {
+  var controllersRoutesName = "controllers.routes";
+}
+
 class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(templateRepo) {
 
   this.customFastTagResolver = GTFastTagResolver2xImpl
@@ -89,7 +93,16 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
 
   // must modify all use of @{} in tag args
   override def checkAndPatchActionStringsInTagArguments(tagArgs : String) : String = {
-    val r = tagArgs.replaceAll("""\@(.+)(?:\s|$)""", "_('controllers.routes').$1.url()")
+
+    // It is tricky to support @@ - absolute urls since it is the tag itself that
+    // calls url() or absoluteURL()
+    // To go around this, we pass an extra parameter to the tag, '_use_absoluteURL=true' when @@ is used.
+    // Then the tag can check for this param if needed
+
+    
+
+    var r = tagArgs.replaceAll("""\@\@""", "_use_absoluteURL=true,"+GTESettings.controllersRoutesName+".")
+    r = tagArgs.replaceAll("""\@""", GTESettings.controllersRoutesName+".")
     r
   }
 
@@ -103,8 +116,11 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
     if (m.find()) {
       // This is an action/link to a static file.
       action = m.group(1); // without ''
-      // TODO: needs absolut support
-      code = " out.append(controllers.routes.Assets.at(\"" + action + "\").url());\n";
+      if ( absolute) {
+        code = " out.append(" +GTESettings.controllersRoutesName+ ".Assets.at(\"" + action + "\").absoluteURL());\n";
+      } else {
+        code = " out.append(" +GTESettings.controllersRoutesName+ ".Assets.at(\"" + action + "\").url());\n";
+      }
     } else {
       if (!action.endsWith(")")) {
         action = action + "()";
@@ -116,12 +132,15 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
       val groovyMethodName: String = "action_resolver_" + nextMethodIndex;
 
       sc.gprintln(" String " + groovyMethodName + "() {", lineNo);
+      sc.gprintln(" try {");
       if (absolute) {
-        // TODO: needs absolute support
-        sc.gprintln(" return _('controllers.routes')." + action + ".url();");
+        sc.gprintln(" return "+GTESettings.controllersRoutesName+"." + action + ".absoluteURL();");
       } else {
-        sc.gprintln(" return _('controllers.routes')." + action + ".url();");
+        sc.gprintln(" return "+GTESettings.controllersRoutesName+"." + action + ".url();");
       }
+      sc.gprintln("} catch(Exception e) {");
+      sc.gprintln(" throw new play.template2.exceptions.GTTemplateRuntimeException(\"Error resolving route to action: \"+e.getMessage())");
+      sc.gprintln("}");
       sc.gprintln(" }");
 
       // generate java code that prints it
