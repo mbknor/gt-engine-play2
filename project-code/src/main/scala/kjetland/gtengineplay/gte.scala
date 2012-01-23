@@ -181,7 +181,7 @@ class GTTypeResolver2xImpl extends GTTypeResolver {
   }
 }
 
-class GTFileResolver2xImpl(folder: File) extends GTFileResolver.Resolver {
+class GTFileResolver2xImpl() extends GTFileResolver.Resolver {
 
   private val USES_GROOVY_TEMPLATES_FILENAME = "uses-groovy-templates.txt"
   
@@ -335,18 +335,22 @@ class GTJavaExtensionMethodResolver2xImpl extends GTJavaExtensionMethodResolver 
 
 object gte {
 
-  GTCompiler.srcDestFolder = new File("gt-generated-src")
+  if ( Play.maybeApplication.isDefined ) {
+    GTCompiler.srcDestFolder = Play.maybeApplication.get.configuration.getString("gte-generated-src-path") match {
+      case Some(e:String) => new File(e)
+      case None => null
+    }
+  }
 
-  val viewFolder = "conf/gtviews/"
   val parentClassLoader: ClassLoader = getClass.getClassLoader
 
   GTGroovyPimpTransformer.gtJavaExtensionMethodResolver = GTJavaExtensionMethodResolver2impl
   GTJavaCompileToClass.typeResolver = new GTTypeResolver2xImpl()
   GTGroovyPimpTransformer.gtJavaExtensionMethodResolver = new GTJavaExtensionMethodResolver2xImpl
 
-  GTFileResolver.impl = new GTFileResolver2xImpl(new File(viewFolder));
+  GTFileResolver.impl = new GTFileResolver2xImpl();
 
-  val folderToDumpClassesIn = new File("tmp/gttemplates");
+  val folderToDumpClassesIn : File = null //new File("tmp/gttemplates");
   val repo = new GTTemplateRepo(parentClassLoader, true, new PreCompilerFactory, false, folderToDumpClassesIn)
 
   def template(path: String): GTETemplate = {
