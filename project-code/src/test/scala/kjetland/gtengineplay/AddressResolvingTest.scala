@@ -42,9 +42,14 @@ object AddressResolvingTest extends Specification with renderer {
   }
 
   "Address resolving in tag-args" should {
-      "be valid for working actions" in {
+    "be valid for working actions" in {
         render("#{form @index(), something: 123/}") must startWith("<form action=\"/index\" method=\"get\"")
       }
+
+//
+//    "be valid for working absolut actions" in {
+//      render("#{form @@index(), something: 123/}") must startWith("<form action=\"/index\" method=\"get\"")
+//    }
 
     "be valid for working actions with params" in {
       render("#{form @index2(1,2), something: 123/}") must startWith("<form action=\"/index2\" method=\"get\"")

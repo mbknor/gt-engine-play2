@@ -41,9 +41,7 @@ public class GTFastTagsInternal2impl extends GTFastTag {
         
         if ( args.containsKey("_use_absoluteURL")) {
             boolean secure = Http.Context.current().request().uri().startsWith("HTTPS");
-            //url = call.absoluteURL( scala.Boolean.box(secure), Http.Context.current().request() );
-            //TODO: Don't know how to use call.absoluteURL from java..
-            throw new GTTemplateRuntimeException("absolute address resolving @@ is not implemented yet");
+            url = call.absoluteURL(Http.Context.current().request());
         } else {
             url = call.url();
         }
@@ -74,10 +72,7 @@ public class GTFastTagsInternal2impl extends GTFastTag {
         
         String url = null;
         if ( args.containsKey("_use_absoluteURL")) {
-            boolean secure = Http.Context.current().request().uri().startsWith("HTTPS");
-            //url = call.absoluteURL( scala.Boolean.box(secure), Http.Context.current().request());
-            //TODO: Don't know how to use call.absoluteURL from java..
-            throw new GTTemplateRuntimeException("absolute address resolving @@ is not implemented yet");
+            url = call.absoluteURL(Http.Context.current().request());
         } else {
             url = call.url();
         }

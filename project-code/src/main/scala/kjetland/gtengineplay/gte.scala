@@ -101,8 +101,16 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
 
     
 
-    var r = tagArgs.replaceAll("""\@\@""", "_use_absoluteURL=true,"+GTESettings.controllersRoutesName+".")
-    r = tagArgs.replaceAll("""\@""", GTESettings.controllersRoutesName+".")
+    val useAbsoluteUrl = tagArgs.indexOf("@@") >= 0
+    var r = tagArgs
+    if (useAbsoluteUrl) {
+      r = r.replaceAll("""\@\@""", GTESettings.controllersRoutesName+".")
+    }
+     
+    r = r.replaceAll("""\@""", GTESettings.controllersRoutesName+".")
+    if (useAbsoluteUrl) {
+      r = r + ",_use_absoluteURL:true"
+    }
     r
   }
 
