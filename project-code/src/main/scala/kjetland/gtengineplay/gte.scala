@@ -3,7 +3,7 @@ package kjetland.gtengineplay
 import java.lang.String
 import play.template2._
 import compile.GTPreCompiler.{GTFragmentCode, SourceContext}
-import exceptions.{GTRuntimeException, GTCompilationExceptionWithSourceInfo, GTRuntimeExceptionWithSourceInfo, GTTemplateNotFoundWithSourceInfo}
+import exceptions._
 import play.template2.compile._
 import compile.GTCompiler
 import play.api.templates.Html
@@ -363,7 +363,11 @@ object gte {
 
   def template(path: String): GTETemplate = {
     gteHelper.exceptionTranslator({ () =>
-      val gtJavaBase: GTJavaBase = repo.getTemplateInstance( GTFileResolver.impl.getTemplateLocationReal(path))
+      val templateLocation = GTFileResolver.impl.getTemplateLocationReal(path)
+      if (templateLocation == null) {
+        throw new GTTemplateRuntimeException("Template not found: " + path)
+      }
+      val gtJavaBase: GTJavaBase = repo.getTemplateInstance( templateLocation )
       new GTETemplate(gtJavaBase.asInstanceOf[GTJavaBase2xImpl])
     })
   }

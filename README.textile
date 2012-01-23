@@ -24,14 +24,12 @@ This is working:
  * system params (_encoding, all the params that are auto added by play 1)
  * Code in FastTag that was not moved from play 1 to gt-engine
  * JavaExtensions
+ * Resolving absolute addresses (@@)
 
 
 This is still not working (Works like a todo list):
 
- * Resolving absolute addresses (@@)
- * Wrong source is shown when loading not found template from code in controller
-  * Might work when integration code is moved out of play-app
- * render args,
+ * render args
  * i18n.tag
  * Locale support
 
