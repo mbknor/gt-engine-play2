@@ -11,7 +11,10 @@ Today is: ${today.format("dd.MM.yyyy")}<br>
 ${q.w.e}
 }*
 
-@{Application.index}
+@{Application.index()}
+<br>
+@@{Application.someOtherPage("x")}
+<br>
 
 <hr>
 <ul>

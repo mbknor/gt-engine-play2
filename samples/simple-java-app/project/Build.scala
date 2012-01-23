@@ -17,8 +17,9 @@ object ApplicationBuild extends Build {
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
       // Add your own project settings here      
       resolvers ++= Seq(
-          "mbknor github Repository" at "http://mbknor.github.com/m2repo/releases/",
-          Resolver.file("Local ivy Repository", file("/Users/mortenkjetland/.ivy2/local/"))(Resolver.ivyStylePatterns)
+          Resolver.file("Local ivy Repository", file("/Users/mortenkjetland/.ivy2/local/"))(Resolver.ivyStylePatterns),
+          "mbknor github Repository" at "http://mbknor.github.com/m2repo/releases/"
+          
           )
     )
 

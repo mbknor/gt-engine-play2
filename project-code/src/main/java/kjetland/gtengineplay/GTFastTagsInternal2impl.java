@@ -40,7 +40,6 @@ public class GTFastTagsInternal2impl extends GTFastTag {
         String url = null;
         
         if ( args.containsKey("_use_absoluteURL")) {
-            boolean secure = Http.Context.current().request().uri().startsWith("HTTPS");
             url = call.absoluteURL(Http.Context.current().request());
         } else {
             url = call.url();

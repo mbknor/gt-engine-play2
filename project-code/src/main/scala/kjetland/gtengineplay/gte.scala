@@ -104,10 +104,10 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
     val useAbsoluteUrl = tagArgs.indexOf("@@") >= 0
     var r = tagArgs
     if (useAbsoluteUrl) {
-      r = r.replaceAll("""\@\@""", GTESettings.controllersRoutesName+".")
+      r = r.replaceAll("""\@\@""", "_(\""+GTESettings.controllersRoutesName+"\").")
     }
      
-    r = r.replaceAll("""\@""", GTESettings.controllersRoutesName+".")
+    r = r.replaceAll("""\@""", "_(\""+GTESettings.controllersRoutesName+"\").")
     if (useAbsoluteUrl) {
       r = r + ",_use_absoluteURL:true"
     }
@@ -125,9 +125,9 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
       // This is an action/link to a static file.
       action = m.group(1); // without ''
       if ( absolute) {
-        code = " out.append(" +GTESettings.controllersRoutesName+ ".Assets.at(\"" + action + "\").absoluteURL());\n";
+        code = " out.append("+GTESettings.controllersRoutesName+".Assets.at(\"" + action + "\").absoluteURL(play.mvc.Http.Context.current().request()));\n";
       } else {
-        code = " out.append(" +GTESettings.controllersRoutesName+ ".Assets.at(\"" + action + "\").url());\n";
+        code = " out.append("+GTESettings.controllersRoutesName+".Assets.at(\"" + action + "\").url());\n";
       }
     } else {
       if (!action.endsWith(")")) {
@@ -142,12 +142,12 @@ class GTPreCompiler2xImpl(templateRepo: GTTemplateRepo) extends GTPreCompiler(te
       sc.gprintln(" String " + groovyMethodName + "() {", lineNo);
       sc.gprintln(" try {");
       if (absolute) {
-        sc.gprintln(" return "+GTESettings.controllersRoutesName+"." + action + ".absoluteURL();");
+        sc.gprintln(" return _(\""+GTESettings.controllersRoutesName+"\")." + action + ".absoluteURL(_(\"play.mvc.Http\\$Context\").current().request());");
       } else {
-        sc.gprintln(" return "+GTESettings.controllersRoutesName+"." + action + ".url();");
+        sc.gprintln(" return _(\""+GTESettings.controllersRoutesName+"\")." + action + ".url();");
       }
       sc.gprintln("} catch(Exception e) {");
-      sc.gprintln(" throw new play.template2.exceptions.GTTemplateRuntimeException(\"Error resolving route to action: \"+e.getMessage())");
+      sc.gprintln(" throw new play.template2.exceptions.GTTemplateRuntimeException(\"Error resolving route to action: \"+e.getClass().getName()+\": \"+e.getMessage())");
       sc.gprintln("}");
       sc.gprintln(" }");
 
