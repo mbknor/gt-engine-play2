@@ -4,5 +4,5 @@
 # Then gte can find all such files on the classpath and then locate
 # all locations where groovy templates might be found.
 #
-# Bellow you must list all "root folders" where template files can be found
+# Below you must list all "root folders" where template files can be found
 /gtviews/
