@@ -1,0 +1,33 @@
+#{extends 'main.html'/}
+
+<h1>Add a computer</h1>
+
+#{form @Application.save() }
+    
+    <fieldset>
+    
+		#{twitterBootstrapInput id: 'name', label: 'Computer name', field: _form.field('name')}
+			<input type="text" id="name" name="name" value="${_form.field('name').value()}">
+	    #{/twitterBootstrapInput}
+			
+		#{twitterBootstrapInput id: 'introduced', label: 'Introduced date', field: _form.field('introduced')}
+			<input type="text" id="introduced" name="introduced" value="${_form.field('introduced').value()}">
+		#{/twitterBootstrapInput}
+			
+		#{twitterBootstrapInput id: 'discontinued', label: 'Discontinued date', field: _form.field('discontinued')}
+			<input type="text" id="discontinued" name="discontinued" value="${_form.field('discontinued').value()}">
+		#{/twitterBootstrapInput}
+			
+        
+		#{twitterBootstrapInput id: 'company.id', label: 'Company', field: _form.field('company.id'), showConstraints: false}
+			#{select 'company.id', items: companyOptions, valueProperty:'key', labelProperty:'value'/}
+		#{/twitterBootstrapInput}
+    
+    </fieldset>
+    
+    <div class="actions">
+        <input type="submit" value="Create this computer" class="btn primary"> or 
+        <a href="@{Application.list(0,'name', 'asc', '')}" class="btn">Cancel</a> 
+    </div>
+    
+#{/form}

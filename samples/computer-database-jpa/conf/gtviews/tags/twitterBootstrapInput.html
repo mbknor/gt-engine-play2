@@ -1,0 +1,19 @@
+*{
+
+**************************************************
+* Generate input according twitter bootsrap rules *
+**************************************************
+
+}*
+<div class="clearfix ${_field.errors() ? 'error' : ''}">
+    <label for="${_id}">${_label}</label>
+    <div class="input">
+        &nbsp;#{doBody/}
+        <span class="help-inline">
+			#{list _field.constraints(), as: 'c' }
+				&{c._1}
+				&nbsp;
+			#{/list}
+		</span> 
+    </div>
+</div>

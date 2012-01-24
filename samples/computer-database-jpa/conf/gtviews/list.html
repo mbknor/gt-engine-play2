@@ -1,0 +1,103 @@
+#{extends 'main.html'/}
+
+<h1 id="homeTitle">&{"computers.list.title", currentPage.getTotalRowCount()}</h1>
+
+#{if flash.containsKey("success")}
+    <div class="alert-message warning">
+        <strong>Done!</strong> ${flash.get("success")}
+    </div>
+#{/if} 
+
+<div id="actions">
+    
+    <form action="#{link newPage: 0, newSortBy: 'name'/}" method="GET">
+        <input type="search" id="searchbox" name="f" value="${currentFilter}" placeholder="Filter by computer name...">
+        <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+    </form>
+    
+    <a class="btn success" id="add" href="@{Application.create()}">Add a new computer</a>
+    
+</div>
+
+#{if currentPage.totalRowCount == 0 }
+    
+    <div class="well">
+        <em>Nothing to display</em>
+    </div>
+    
+#{/if}
+#{else}
+    
+    <table class="computers zebra-striped">
+        <thead>
+            <tr>
+                #{header key: "name", title: "Computer name"/}
+				#{header key: "introduced", title: "Introduced"/}
+				#{header key: "discontinued", title: "Discontinued"/}
+				#{header key: "company.name", title: "Company"/}
+            </tr>
+        </thead>
+        <tbody>
+
+            #{list currentPage.getList(), as: 'computer'}
+                <tr>
+                    <td><a href="@{Application.edit(computer.id)}">${computer.name}</a></td>
+                    <td>
+                        #{if computer.introduced == null}
+                            <em>-</em>
+                        #{/if}
+						#{else}
+                            ${computer.introduced.format("dd MMM yyyy")}
+                        #{/else}
+                    </td>
+                    <td>
+                        #{if computer.discontinued == null}
+                            <em>-</em>
+                        #{/if}
+						#{else}
+                            ${computer.discontinued.format("dd MMM yyyy")}
+                        #{/else}
+                    </td>
+                    <td>
+                        #{if computer.company == null}
+                            <em>-</em>
+                        #{/if}
+						#{else}
+                            ${computer.company.name}
+                        #{/else}
+                    </td>
+                </tr>
+            #{/list}
+
+        </tbody>
+    </table>
+
+    <div id="pagination" class="pagination">
+        <ul>
+            #{if currentPage.hasPrev()}
+                <li class="prev">
+                    <a href="#{link newPage: currentPage.pageIndex - 1, newSortBy: null/}">&larr; Previous</a>
+                </li>
+            #{/if}
+			#{else}
+                <li class="prev disabled">
+                    <a>&larr; Previous</a>
+                </li>
+            #{/else}
+            <li class="current">
+                <a>Displaying ${currentPage.displayXtoYofZ}</a>
+            </li>
+            #{if currentPage.hasNext()}
+                <li class="next">
+                    <a href="#{link newPage: currentPage.pageIndex + 1, newSortBy: null/}">Next &rarr;</a>
+                </li>
+            #{/if}
+			#{else}
+                <li class="next disabled">
+                    <a>Next &rarr;</a>
+                </li>
+            #{/else}
+        </ul>
+    </div>
+    
+#{/else}

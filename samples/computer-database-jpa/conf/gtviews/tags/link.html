@@ -1,0 +1,23 @@
+*{
+****************************************
+* Helper generating navigation links    *
+****************************************
+
+args: newPage, newSortBy
+}*%{
+    sortBy = currentSortBy
+    order = currentOrder
+    
+    if(_newSortBy != null) {
+        sortBy = _newSortBy
+        if(currentSortBy == _newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+}%@{Application.list(_newPage, sortBy, order, currentFilter)}

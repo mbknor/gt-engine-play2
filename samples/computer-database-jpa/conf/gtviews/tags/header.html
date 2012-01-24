@@ -1,0 +1,11 @@
+*{
+**********************************
+* Helper generating table headers *
+***********************************
+args: key, title
+}*
+
+<th class="${_key.replace(".","_")} header #{if currentSortBy == _key} ${currentOrder == "asc" ? "headerSortDown" : "headerSortUp"} #{/if}">
+  <a href="#{link newPage: 0, newSortBy: _key/}">${_title}</a>
+</th>
+
