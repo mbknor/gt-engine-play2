@@ -1,5 +1,5 @@
 Groovy Template Engine for Play 2
----------------------------------
+=========
 
 This project is a module to Play 2. It uses the gt-engine (https://github.com/mbknor/gt-engine) to enable the same Groovy Templates from Play 1 in Play 2.
 More info about gt-engine can be found here: http://kjetland.com/blog/2011/11/playframework-new-faster-groovy-template-engine/
@@ -8,6 +8,8 @@ Due to lots of SBT-integration problems, I did not integrate gt-engine into Play
 are not compiled when SBT compiles your applications. Instead, they are compiled on the fly when used the first time.
 
 This is working:
+----------------
+
  * Basic template stuff
  * all tags (#extends, #include, #list, etc)
  * resolving values ($)
@@ -29,6 +31,7 @@ This is working:
 
 
 This is still not working (Works like a todo list):
+------------
 
  * Improve routes-resolving in tag-args by wrapping in method to try-catch it - needs "inteligent" parsing..
  * move gtviews out of conf-folder
