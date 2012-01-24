@@ -51,13 +51,12 @@ public class GTFastTagsInternal2impl extends GTFastTag {
             method = "POST";
         }
         String encoding = "utf-8";
-        StringWriter out = template.out;
-        out.append("<form action=\"" + url + "\" method=\"" + method.toLowerCase() + "\" accept-charset=\"" + encoding + "\" enctype=\"" + enctype + "\" " + GTInternalFastTags.serialize(args, "action", "method", "accept-charset", "enctype") + ">");
+        template.out.append("<form action=\"" + url + "\" method=\"" + method.toLowerCase() + "\" accept-charset=\"" + encoding + "\" enctype=\"" + enctype + "\" " + GTInternalFastTags.serialize(args, "action", "method", "accept-charset", "enctype") + ">");
         if (!("GET".equalsIgnoreCase(method))) {
             //_authenticityToken(args, body, out, template, fromLine);
         }
         template.insertOutput(content.render());
-        out.append("</form>");
+        template.out.append("</form>");
     }
 
     public static void tag_a(GTJavaBase template, Map<String, Object> args, GTContentRenderer content) {
@@ -75,11 +74,10 @@ public class GTFastTagsInternal2impl extends GTFastTag {
         } else {
             url = call.url();
         }
-        
-        StringWriter out = template.out;
-        out.append("<a href=\"" + url + "\" " + GTInternalFastTags.serialize(args, "href") + ">");
+
+        template.out.append("<a href=\"" + url + "\" " + GTInternalFastTags.serialize(args, "href") + ">");
         template.insertOutput(content.render());
-        out.append("</a>");
+        template.out.append("</a>");
     }
 
     public static void tag_error(GTJavaBase template, Map<String, Object> args, GTContentRenderer content) {
