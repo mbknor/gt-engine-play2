@@ -1,6 +1,11 @@
 Groovy Template Engine for Play 2
 =========
 
+Project-status: BETA (24. January 2012)
+========
+
+Please file issues here: https://github.com/mbknor/gt-engine-play2/issues
+
 This project is a module to Play 2. It uses the gt-engine (https://github.com/mbknor/gt-engine) to enable the same Groovy Templates from Play 1 in Play 2.
 More info about gt-engine can be found here: http://kjetland.com/blog/2011/11/playframework-new-faster-groovy-template-engine/
 
