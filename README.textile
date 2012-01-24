@@ -19,7 +19,7 @@ This is working:
  * Finding template files from disk
  * custom tags
  * FastTag-handling-integration
- * loading files from modules
+ * loading templates from modules (jars)
  * resolving template files via resources
  * system params (_encoding, all the params that are auto added by play 1)
  * Code in FastTag that was not moved from play 1 to gt-engine
@@ -27,8 +27,12 @@ This is working:
  * Resolving absolute addresses (@@)
 
 
+
 This is still not working (Works like a todo list):
 
+ * Improve routes-resolving in tag-args by wrapping in method to try-catch it - needs "inteligent" parsing..
+ * move gtviews out of conf-folder
+ * Scala support (scala uses different Form-instance)
  * render args
  * i18n.tag
  * Locale support
