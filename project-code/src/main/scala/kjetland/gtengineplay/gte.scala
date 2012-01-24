@@ -199,7 +199,7 @@ class GTFileResolver2xImpl() extends GTFileResolver.Resolver {
   private def findGTViewRootUrls() : List[URL] = {
     import scala.collection.JavaConversions._
 
-    this.getClass.getClassLoader.getResources(USES_GROOVY_TEMPLATES_FILENAME).toList.distinct.map( { f : URL =>
+    val resolvedLocations = this.getClass.getClassLoader.getResources(USES_GROOVY_TEMPLATES_FILENAME).toList.distinct.map( { f : URL =>
       // f is the location of the USES_GROOVY_TEMPLATES_FILENAME-file, we must create new url for the
       // actual template root "folder"
       val urlBase = f.toString.substring(0, f.toString.lastIndexOf("/"))
@@ -210,6 +210,17 @@ class GTFileResolver2xImpl() extends GTFileResolver.Resolver {
         new URL(urlBase + path.trim())
       })
     }).flatten
+
+    // Check if we find template folder on disk - for always seeing last develop version of file
+    val localFolder = new File("conf/gtviews")
+    if (localFolder.exists()) {
+      // use it too
+      localFolder.toURI.toURL +: resolvedLocations
+    } else {
+      resolvedLocations
+    }
+
+
   }
   
   private def urlWorks(url : URL) : Boolean = {
