@@ -16,7 +16,7 @@
 
     if(!_valueProperty)
         _valueProperty = 'id';
-    play.template2.GTTagContext.current().data.put("selected", _value);
+    play.template2.GTTagContext.singleton.current().data.put("selected", _value);
     
     serializedAttrs  = play.template2.compile.GTInternalFastTags.serialize(_attrs, "size", "name", "items", "labelProperty", "value", "valueProperty")
 }%

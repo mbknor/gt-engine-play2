@@ -4,3 +4,4 @@ target
 *.iml
 samples/simple-java-app/logs
 samples/computer-database-jpa/logs
+gte-src

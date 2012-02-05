@@ -1,7 +1,16 @@
 Groovy Template Engine for Play 2
 =========
 
-Project-status: BETA (24. January 2012)
+Current version: 0.1.2
+
+Project-status: BETA
+
+History:
+
+ * 5. February 2012 - Version 0.1.2
+  * Updated to gt-engine version 0.1.7.7
+ * 24. January 2012 - Version 0.1.1
+
 ========
 
 Please file issues here: https://github.com/mbknor/gt-engine-play2/issues
@@ -21,7 +30,7 @@ This is what you have to do to enable it:
 Add dependency to the module using sbt (project/Build.scala):
 
 	val appDependencies = Seq(
-	  "kjetland" %% "gt-engine-play" % "0.1.1"
+	  "kjetland" %% "gt-engine-play" % "0.1.2"
 	)
 
 You also have to tell sbt where to find it:
@@ -97,7 +106,7 @@ This is still not working (Works like a todo list):
 
  * Improve routes-resolving in tag-args by wrapping in method to try-catch it - needs "inteligent" parsing..
  * move gtviews out of conf-folder
- * Scala support (scala uses different Form-instance)
+ * Better Scala support (scala uses different Form-instance)
  * render args
  * i18n.tag
  * Locale support
