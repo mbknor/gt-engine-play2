@@ -6,12 +6,15 @@ Current version: 0.1.3
 Project-status: BETA
 
 History:
- * 14. February 2012 - Version 0.1.3
-  * Fixed various bugs related to #{set/} and #{get/}
-  * Now compatible with official 2.0 RC1 release
- * 5. February 2012 - Version 0.1.2
-  * Updated to gt-engine version 0.1.7.7
- * 24. January 2012 - Version 0.1.1
+
+	* Version 0.1.3 - 14. February 2012
+    	* Fixed various bugs related to #{set/} and #{get/}
+    	* Now compatible with official 2.0 RC1 release
+		
+	* Version 0.1.2 - 5. February 2012
+		* Updated to gt-engine version 0.1.7.7
+		
+	* Version 0.1.1 - 24. January 2012
 
 ========
 
