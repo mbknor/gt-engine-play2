@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       // Add your project dependencies here,
-      "kjetland" %% "gt-engine-play" % "0.1.2"
+      "kjetland" %% "gt-engine-play2" % "0.1.3"
     )
     
     javacOptions += "-g"
