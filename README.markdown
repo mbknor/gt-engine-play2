@@ -1,11 +1,15 @@
 Groovy Template Engine for Play 2
 =========
 
-Current version: 0.1.3
+Current version: 0.1.4
 
 Project-status: BETA
 
 History:
+
+	* Version 0.1.4 - 20. February 2012
+		* Now compatible with official 2.0 RC2 release
+		* Fixed issue related to calling method on java object with name-collision with JavaExtenstion-name
 
 	* Version 0.1.3 - 14. February 2012
     	* Fixed various bugs related to #{set/} and #{get/}
@@ -35,7 +39,7 @@ This is what you have to do to enable it:
 Add dependency to the module using sbt (project/Build.scala):
 
 	val appDependencies = Seq(
-	  "kjetland" %% "gt-engine-play2" % "0.1.3"
+	  "kjetland" %% "gt-engine-play2" % "0.1.4"
 	)
 
 You also have to tell sbt where to find it:
