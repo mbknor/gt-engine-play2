@@ -17,6 +17,7 @@ import org.apache.commons.io.IOUtils
 import play.api.{Play, PlayException}
 import play.mvc.Http
 import java.lang.reflect.Method
+import play.core.SourceMapper
 
 
 class RawData(val data : String)
@@ -185,6 +186,15 @@ class GTTypeResolver2xImpl extends GTTypeResolver {
       return os.toByteArray();
     } finally {
       is.close();
+    }
+  }
+
+  def isApplicationClass(className: String) = {
+    play.api.Play.current.sources match {
+      case Some(sm : SourceMapper) => {
+        sm.sourceOf( className ).isDefined // if we find source, then it is a Play app class..
+      }
+      case None => false // Play does not have source info available (prod mode?) - must answer no.
     }
   }
 }
