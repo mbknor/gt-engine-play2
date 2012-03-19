@@ -46,7 +46,7 @@ object GTEnginePlayBuild extends Build {
   object BuildSettings {
 
           val buildOrganization = "kjetland"
-          val buildVersion      = "0.1.6-SNAPSHOT"
+          val buildVersion      = "0.1.6"
           val buildScalaVersion = "2.9.1"
           val buildSbtVersion   = "0.11.2"
 
