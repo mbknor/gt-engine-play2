@@ -29,9 +29,9 @@ object GTEnginePlayBuild extends Build {
   object Dependencies {
 
       val runtime = Seq(
-        "kjetland"     %%   "gt-engine"            % "0.1.7.11",
-        "play"         %%   "play"                 % "2.0-RC4" % "provided" notTransitive(),
-        "play"         %%   "templates"            % "2.0-RC4" % "provided" notTransitive(),
+        "kjetland"     %%   "gt-engine"            % "0.1.7.12",
+        "play"         %%   "play"                 % "2.0" % "provided" notTransitive(),
+        "play"         %%   "templates"            % "2.0" % "provided" notTransitive(),
         "com.github.scala-incubator.io" %% "scala-io-file" % "0.2.0" % "provided",
         "org.codehaus.jackson" % "jackson-core-asl" % "[1.9.0,2.0.0)" % "provided", // Needed by play.data.Form
         "org.codehaus.jackson" % "jackson-mapper-asl" % "[1.9.0,2.0.0)" % "provided", // Needed by play.data.Form
@@ -46,7 +46,7 @@ object GTEnginePlayBuild extends Build {
   object BuildSettings {
 
           val buildOrganization = "kjetland"
-          val buildVersion      = "0.1.5"
+          val buildVersion      = "0.1.6-SNAPSHOT"
           val buildScalaVersion = "2.9.1"
           val buildSbtVersion   = "0.11.2"
 

@@ -358,10 +358,6 @@ class GTETemplate(gtJavaBase: GTJavaBase2xImpl) {
   }
 }
 
-class GTJavaExtensionMethodResolver2xImpl extends GTJavaExtensionMethodResolver {
-  def findClassWithMethod(methodName: String) = null
-}
-
 object gte {
 
   if ( Play.maybeApplication.isDefined ) {
@@ -375,7 +371,6 @@ object gte {
 
   GTGroovyPimpTransformer.gtJavaExtensionMethodResolver = GTJavaExtensionMethodResolver2impl
   GTJavaCompileToClass.typeResolver = new GTTypeResolver2xImpl()
-  GTGroovyPimpTransformer.gtJavaExtensionMethodResolver = new GTJavaExtensionMethodResolver2xImpl
 
   GTFileResolver.impl = new GTFileResolver2xImpl();
 

@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       "org.hibernate" % "hibernate-entitymanager" % "3.6.9.Final",
-      "kjetland" %% "gt-engine-play2" % "0.1.5"
+      "kjetland" %% "gt-engine-play2" % "0.1.6"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
