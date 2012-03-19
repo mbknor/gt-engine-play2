@@ -6,6 +6,7 @@ Current version: 0.1.6
 Project-status: BETA
 
 History:
+
 	* Version 0.1.6 - 19. Mars 2012
 		* Fixed issue #3 and #14 related to JavaExtension
 		* Now using Play 2.0 final
